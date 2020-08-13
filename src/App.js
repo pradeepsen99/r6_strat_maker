@@ -82,6 +82,8 @@ var Fabric = createReactClass({
   }
 });
 
+var player_add;
+
 var NewObjects = createReactClass({
 	mixins: [reactor.ReactMixin],
   getDataBindings() {
@@ -93,11 +95,18 @@ var NewObjects = createReactClass({
   render: function() {
   	if (this.state.fabricData.get('objects').size == 0) {
     	// no object is on the canvas so show interface to add one
-      return (<div style={{float: "right"}}>
-        <button onClick={this.addImg}>Add Kanal Map </button>
-        <button onClick={this.addSquare}>Add Square</button>
-      </div>);
-    } else if (this.state.activeObject) {
+      return (
+      <div style={{float: "right"}}>
+        <button onClick={this.addKanalImg}>Add Kanal Map </button>
+        <br></br>
+        <button onClick={this.addSmokeImg}>Add Square</button>
+        <br></br>
+        <input placeholder="Name" type='text' name='username' id='username' value={this.state.value}  maxlength="50" />
+        <br></br>
+      <button onClick={this.addPlayer}>ADD PLAYER</button>
+      </div>
+      );
+    } /*else if (this.state.activeObject) {
     	// an object is selected so lets interact with it
     	return (<div>
       	<div style={{ border: '1px solid', padding: '10px 5px 5px', margin: '15px 10px 0 0' }}>
@@ -109,10 +118,13 @@ var NewObjects = createReactClass({
         <br />
         <button onClick={this.remove}>Delete Object</button>
       </div>);
-    } else {
+    } */else {
     	// if there is an object but it is not selected then remove the buttons
     	return null;
     }
+  },
+  addPlayer(){
+
   },
   addCircle() {
   	// all our action handler can just talk directly to fabric
@@ -142,7 +154,7 @@ var NewObjects = createReactClass({
     fabricCanvas.setActiveObject(fabricCanvas.getObjects()[0]);
     fabricCanvas.fire('saveData');
   },
-  addImg(){
+  addKanalImg(){/*
     fabric.Image.fromURL('https://vignette.wikia.nocookie.net/rainbowsix/images/8/8f/Kanal_1st_floor_227430.png/revision/latest?cb=20151202214817', function(image) {
       image.set({
         left: 0,
@@ -153,8 +165,29 @@ var NewObjects = createReactClass({
       .setCoords();
 
       fabricCanvas.add(image);
+    });*/
+    fabric.Image.fromURL('https://vignette.wikia.nocookie.net/rainbowsix/images/8/8f/Kanal_1st_floor_227430.png/revision/latest?cb=20151202214817', function(img) {
+      // add background image
+      fabricCanvas.setBackgroundImage(img, fabricCanvas.renderAll.bind(fabricCanvas), {
+         scaleX: fabricCanvas.width / img.width,
+         scaleY: fabricCanvas.height / img.height
+      });
+   });
+  },
+  addSmokeImg(){
+    fabric.Image.fromURL('https://www.vhv.rs/dpng/d/579-5793740_rainbow-six-operator-icons-hd-png-download.png', function(image) {
+      image.set({
+        left: 0,
+        top: 0,
+        angle: 0
+      })
+      .scale(.05)
+      .setCoords();
+
+      fabricCanvas.add(image);
     });
   },
+  
   setRed() {
   	// another instance where we are just talking to fabric directly
   	fabricCanvas.getActiveObject().fill = 'red';
@@ -182,6 +215,7 @@ var ActiveObject = createReactClass({
     };
   },
   render: function() {
+    return null;
   	if (this.state.fabricObject) {
     	// if an object exists in state we can acess the data from any where in the app
     	var fill = this.state.fabricObject.get('fill');
