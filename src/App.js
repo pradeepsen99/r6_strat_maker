@@ -59,8 +59,8 @@ var Fabric = createReactClass({
     
     // Here we have the canvas so we can initialize fabric
     fabricCanvas.initialize(el, {
-    	height: 700,
-      width: 700,
+    	height: window.innerHeight,
+      width: window.innerWidth-200,
       backgroundColor : "#000",
     });
     
@@ -94,7 +94,7 @@ var NewObjects = createReactClass({
   	if (this.state.fabricData.get('objects').size == 0) {
     	// no object is on the canvas so show interface to add one
       return (<div style={{float: "right"}}>
-        <button onClick={this.addCircle}>Add Circle</button>
+        <button onClick={this.addImg}>Add Kanal Map </button>
         <button onClick={this.addSquare}>Add Square</button>
       </div>);
     } else if (this.state.activeObject) {
@@ -141,6 +141,19 @@ var NewObjects = createReactClass({
     }));
     fabricCanvas.setActiveObject(fabricCanvas.getObjects()[0]);
     fabricCanvas.fire('saveData');
+  },
+  addImg(){
+    fabric.Image.fromURL('https://vignette.wikia.nocookie.net/rainbowsix/images/8/8f/Kanal_1st_floor_227430.png/revision/latest?cb=20151202214817', function(image) {
+      image.set({
+        left: 0,
+        top: 0,
+        angle: 0
+      })
+      .scale(.8)
+      .setCoords();
+
+      fabricCanvas.add(image);
+    });
   },
   setRed() {
   	// another instance where we are just talking to fabric directly
