@@ -59,8 +59,9 @@ var Fabric = createReactClass({
     
     // Here we have the canvas so we can initialize fabric
     fabricCanvas.initialize(el, {
-    	height: 300,
-      width: 300,
+    	height: 700,
+      width: 700,
+      backgroundColor : "#000",
     });
     
     // on mouse up lets save some state
