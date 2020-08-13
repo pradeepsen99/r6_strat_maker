@@ -92,7 +92,7 @@ var NewObjects = createReactClass({
   render: function() {
   	if (this.state.fabricData.get('objects').size == 0) {
     	// no object is on the canvas so show interface to add one
-      return (<div>
+      return (<div style={{float: "right"}}>
         <button onClick={this.addCircle}>Add Circle</button>
         <button onClick={this.addSquare}>Add Square</button>
       </div>);
@@ -190,7 +190,7 @@ var ActiveObject = createReactClass({
 function App() {
   return (
     <div className="App">
-      <div style={{ float: 'left' }}>
+      <div style={{ float: 'right' }}>
     		<ActiveObject />
     		<NewObjects />
       </div>
