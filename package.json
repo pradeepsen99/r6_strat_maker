@@ -8,12 +8,15 @@
     "@testing-library/user-event": "^7.1.2",
     "create-react-class": "^15.6.3",
     "fabric": "^3.6.3",
+    "gh-pages": "^3.1.0",
     "nuclear-js": "^1.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

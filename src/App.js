@@ -93,7 +93,7 @@ var NewObjects = createReactClass({
     };
   },
   render: function() {
-  	if (this.state.fabricData.get('objects').size == 0) {
+  	//if (this.state.fabricData.get('objects').size == 0) {
     	// no object is on the canvas so show interface to add one
       return (
       <div style={{float: "right"}}>
@@ -106,7 +106,7 @@ var NewObjects = createReactClass({
       <button onClick={this.addPlayer}>ADD PLAYER</button>
       </div>
       );
-    } /*else if (this.state.activeObject) {
+    /*} else if (this.state.activeObject) {
     	// an object is selected so lets interact with it
     	return (<div>
       	<div style={{ border: '1px solid', padding: '10px 5px 5px', margin: '15px 10px 0 0' }}>
@@ -118,13 +118,18 @@ var NewObjects = createReactClass({
         <br />
         <button onClick={this.remove}>Delete Object</button>
       </div>);
-    } */else {
+    } *///else {
     	// if there is an object but it is not selected then remove the buttons
-    	return null;
-    }
+    	//return null;
+    //}
   },
   addPlayer(){
+    var val = document.getElementById('og:image').value,
+                src = 'http://webpage.com/images/' + val +'.png',
+                img = document.createElement('img');
 
+            img.src = src;
+            document.body.appendChild(img);
   },
   addCircle() {
   	// all our action handler can just talk directly to fabric
